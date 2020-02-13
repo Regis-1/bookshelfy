@@ -8,3 +8,9 @@ Bookshelf::Bookshelf(std::string t, int size_y, int size_x, int y, int x){
 	add_window_title(title);
 	irefresh();
 }
+
+int Bookshelf::print_content(){
+}
+
+int Bookshelf::input_action(){
+}

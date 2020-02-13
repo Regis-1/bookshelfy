@@ -11,6 +11,8 @@ class Bookshelf : public IWindow{
 		std::string title;
 	public:
 		Bookshelf(std::string t, int size_y, int size_x, int y, int x);
+		int print_content();
+		int input_action();
 };
 
 #endif

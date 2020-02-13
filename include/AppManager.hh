@@ -13,12 +13,13 @@
 class AppManager{
 	private:
 		int scr_max_y, scr_max_x;
-		IWindow* iwindow;
 		Bookshelf* bookshelf1; 
 		Bookshelf* bookshelf2;
 		InputWindow* inputwindow;
 	public:
 		AppManager();
+		void main_menu();
+		int select_option(IWindow* obj);
 };
 
 #endif

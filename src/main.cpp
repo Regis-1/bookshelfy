@@ -8,11 +8,11 @@ int main(int argc, char* argv[]){
 	initscr();
 	curs_set(0);
 	noecho();
+	keypad(stdscr, true);
 	
 	AppManager* appmanager = new AppManager();
 	refresh();
-
-	getch();
+	appmanager->main_menu();
 
 	endwin();
 	return 0;
