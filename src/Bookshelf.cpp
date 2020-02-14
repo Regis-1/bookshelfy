@@ -10,7 +10,9 @@ Bookshelf::Bookshelf(std::string t, int size_y, int size_x, int y, int x){
 }
 
 int Bookshelf::print_content(){
+	return 0;
 }
 
 int Bookshelf::input_action(){
+	return 0;
 }

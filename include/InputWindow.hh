@@ -1,8 +1,6 @@
 #ifndef INPUTWINDOW_HH_
 #define INPUTWINDOW_HH_
 
-#include <ncurses.h>
-
 #include "../include/IWindow.hh"
 
 #define K_ENTER 10
@@ -14,6 +12,8 @@ class InputWindow : public IWindow{
 		InputWindow(int size_y, int size_x, int y, int x);
 		int print_content();
 		int input_action();
+		std::string input_book_name();
+		std::string input_prompt();
 };
 
 #endif

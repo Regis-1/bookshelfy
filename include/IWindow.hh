@@ -21,11 +21,11 @@ class IWindow{
 		void iwattroff(int attrs);
 		std::vector<int> get_max_dimensions();
 		void box_window();
+		void iclear_window();
 		void load_content(std::vector<std::string> c);
 		void push_content(std::string s);
 		void pop_content();
 		std::vector<std::string> get_content();
-		int get_content_size();
 		void irefresh();
 		void add_window_title(std::string title);
 		int get_highlighted();

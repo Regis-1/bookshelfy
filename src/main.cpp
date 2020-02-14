@@ -5,6 +5,7 @@
 #include "../include/AppManager.hh"
 
 int main(int argc, char* argv[]){
+	bool exit = false;
 	initscr();
 	curs_set(0);
 	noecho();
@@ -12,8 +13,8 @@ int main(int argc, char* argv[]){
 	
 	AppManager* appmanager = new AppManager();
 	refresh();
-	appmanager->main_menu();
+	while(!exit)
+		exit = appmanager->main_menu();
 
-	endwin();
 	return 0;
 }

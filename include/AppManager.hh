@@ -18,8 +18,9 @@ class AppManager{
 		InputWindow* inputwindow;
 	public:
 		AppManager();
-		void main_menu();
-		int select_option(IWindow* obj);
+		bool main_menu();
+		void add_book();
+		void exit_bookshelfy();
 };
 
 #endif

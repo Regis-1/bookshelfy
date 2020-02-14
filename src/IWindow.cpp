@@ -26,6 +26,10 @@ void IWindow::box_window(){
 	box(window,0,0);
 }
 
+void IWindow::iclear_window(){
+	werase(window);
+}
+
 void IWindow::load_content(std::vector<std::string> c){
 	content.swap(c);
 }
@@ -40,10 +44,6 @@ void IWindow::pop_content(){
 
 std::vector<std::string> IWindow::get_content(){
 	return content;
-}
-
-int IWindow::get_content_size(){
-	return content.size();
 }
 
 void IWindow::irefresh(){

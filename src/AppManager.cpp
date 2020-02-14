@@ -7,19 +7,47 @@ AppManager::AppManager(){
 	inputwindow = new InputWindow(INPUTWIN_HEIGHT, scr_max_x, scr_max_y - INPUTWIN_HEIGHT, 0);
 }
 
-void AppManager::main_menu(){
-	IWindow* obj;
-	obj = inputwindow;
+bool AppManager::main_menu(){
 	int choice = -1;
 	while(choice < 0){
-		choice = select_option(obj);
+		if(inputwindow->print_content() != 0){
+			endwin();
+			return true;
+		}
+		choice = inputwindow->input_action();
 	}
-	//TUTAJ DALSZA CZESC PROGRAMU ----- TODO_
+
+	switch(choice){
+		case 0:
+			add_book();
+			break;
+		case 1:
+			//remove_book();
+			break;
+		case 2:
+			//find_book();
+			break;
+		case 3:
+			//sort_books();
+			break;
+		case 4:
+			exit_bookshelfy();
+			return true;
+	}
+	return false;
 }
 
-int AppManager::select_option(IWindow* obj){
-	if(obj->print_content() != 0)
-		return -1;
+void AppManager::add_book(){
+	inputwindow->input_book_name();
+	int dim_dwindow[2] = {10,30};
+	DialogWindow* dialogwindow = new DialogWindow("Choose bookshelf:", dim_dwindow[0],dim_dwindow[1], scr_max_y/2 - dim_dwindow[0]/2, scr_max_x/2 - dim_dwindow[1]/2);
+	refresh();
+	dialogwindow->print_content();
+	//Bookshelf * b = dialogwindow->choose_bookshelf();
+	//b->add_book();
+	//b->update_bookshelf();
+}
 
-	return obj->input_action();
+void AppManager::exit_bookshelfy(){
+	endwin();
 }
