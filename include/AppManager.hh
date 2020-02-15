@@ -20,6 +20,7 @@ class AppManager{
 		AppManager();
 		bool main_menu();
 		void add_book();
+		void remove_book();
 		void exit_bookshelfy();
 		Bookshelf* get_bookshelf(int b_num);
 };

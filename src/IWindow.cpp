@@ -85,8 +85,8 @@ int IWindow::input_action(){
 	}
 	else if(ch == K_ENTER)
 		return get_highlighted();
-	else{
-		printw("input_action ERROR");
+	else if(ch == (int)'q'){
+		return -2;
 	}
 
 	return -1;

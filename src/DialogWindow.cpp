@@ -14,7 +14,6 @@ int DialogWindow::print_content(){
 
 	iclear_window();
 	box_window();
-	irefresh();
 
 	mvwprintw(get_window(), wmax[0]/2 - (get_content().size()+2)/2, wmax[1]/2 - title.length()/2, title.c_str());
 	for(int i=0; i<(int)get_content().size(); i++){
