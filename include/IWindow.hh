@@ -5,6 +5,8 @@
 #include <string>
 #include <vector>
 
+#define K_ENTER 10
+
 class IWindow{
 	private:
 		WINDOW* window;
@@ -12,9 +14,6 @@ class IWindow{
 		int max_y, max_x;
 		int highlighted = 0;
 	public:
-		virtual int print_content() = 0;
-		virtual int input_action() = 0;
-
 		void new_iwindow(int size_y, int size_x, int y, int x);
 		WINDOW* get_window();
 		void iwattron(int attrs);
@@ -32,6 +31,7 @@ class IWindow{
 		void set_highlighted(int n);
 		void add_highlighted();
 		void sub_highlighted();
+		int input_action();
 };
 
 #endif

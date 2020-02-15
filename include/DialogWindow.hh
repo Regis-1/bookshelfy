@@ -10,7 +10,7 @@ class DialogWindow : public IWindow{
 	public:
 		DialogWindow(std::string t, int size_y, int size_x, int y, int x);
 		int print_content();
-		int input_action();
+		int choose_bookshelf();
 };
 
 #endif

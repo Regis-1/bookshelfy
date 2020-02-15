@@ -27,6 +27,11 @@ int DialogWindow::print_content(){
 	return 0;
 }
 
-int DialogWindow::input_action(){
-	return 0;
+int DialogWindow::choose_bookshelf(){
+	int choice = -1;
+	while(choice < 0){
+		print_content();
+		choice = input_action();
+	}
+	return choice;
 }

@@ -69,3 +69,25 @@ void IWindow::add_highlighted(){
 void IWindow::sub_highlighted(){
 	highlighted--;
 }
+
+int IWindow::input_action(){
+	int ch = 0;
+	ch = getch();
+	if(ch == KEY_LEFT || ch == KEY_UP){
+		sub_highlighted();
+		if(get_highlighted() < 0)
+			set_highlighted(0);
+	}
+	else if(ch == KEY_RIGHT || ch == KEY_DOWN){
+		add_highlighted();
+		if(get_highlighted() >(int)get_content().size()-1)
+			set_highlighted(get_content().size()-1);
+	}
+	else if(ch == K_ENTER)
+		return get_highlighted();
+	else{
+		printw("input_action ERROR");
+	}
+
+	return -1;
+}

@@ -9,13 +9,8 @@ AppManager::AppManager(){
 
 bool AppManager::main_menu(){
 	int choice = -1;
-	while(choice < 0){
-		if(inputwindow->print_content() != 0){
-			endwin();
-			return true;
-		}
-		choice = inputwindow->input_action();
-	}
+	if(inputwindow->menu_loop(&choice))
+		return true;
 
 	switch(choice){
 		case 0:
@@ -38,16 +33,29 @@ bool AppManager::main_menu(){
 }
 
 void AppManager::add_book(){
-	inputwindow->input_book_name();
+	std::string book_name = inputwindow->input_book_name();
 	int dim_dwindow[2] = {10,30};
 	DialogWindow* dialogwindow = new DialogWindow("Choose bookshelf:", dim_dwindow[0],dim_dwindow[1], scr_max_y/2 - dim_dwindow[0]/2, scr_max_x/2 - dim_dwindow[1]/2);
 	refresh();
 	dialogwindow->print_content();
-	//Bookshelf * b = dialogwindow->choose_bookshelf();
-	//b->add_book();
-	//b->update_bookshelf();
+	Bookshelf * b = get_bookshelf(dialogwindow->choose_bookshelf());
+	if(b){
+		b->add_book(book_name);
+	}
+	delwin(dialogwindow->get_window());
+	delete dialogwindow;
+	refresh();
+	bookshelf1->update();
+	bookshelf2->update();
 }
 
 void AppManager::exit_bookshelfy(){
 	endwin();
+}
+
+Bookshelf* AppManager::get_bookshelf(int b_num){
+	std::vector<Bookshelf*> bss = {bookshelf1, bookshelf2};
+	if(b_num == (int)bss.size())
+		return NULL;
+	return bss[b_num];
 }

@@ -30,26 +30,6 @@ int InputWindow::print_content(){
 	return 0;
 }
 
-int InputWindow::input_action(){
-	int ch = 0;
-	ch = getch();
-	switch(ch){
-		case KEY_LEFT:
-			sub_highlighted();
-			if(get_highlighted() < 0)
-				set_highlighted(0);
-			break;
-		case KEY_RIGHT:
-			add_highlighted();
-			if(get_highlighted() >(int)get_content().size()-1)
-				set_highlighted(get_content().size()-1);
-			break;
-		case K_ENTER:
-			return get_highlighted();
-	}
-	return -1;
-}
-
 std::string InputWindow::input_book_name(){
 	iclear_window();
 	box_window();
@@ -71,4 +51,15 @@ std::string InputWindow::input_prompt(){
 	mvwprintw(get_window(), 1, 1, "Name of the book: ");	
 	wgetstr(get_window(), buffer);
 	return std::string(buffer);
+}
+
+bool InputWindow::menu_loop(int* choice){
+	while(*choice < 0){
+		if(print_content() != 0){
+			endwin();
+			return true;
+		}
+		*choice = input_action();
+	}
+	return false;
 }
