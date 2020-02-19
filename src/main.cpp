@@ -16,5 +16,8 @@ int main(int argc, char* argv[]){
 	while(!exit)
 		exit = appmanager->main_menu();
 
+	if(appmanager->will_save())
+		appmanager->save_app_state();
+
 	return 0;
 }

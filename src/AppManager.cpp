@@ -26,6 +26,7 @@ bool AppManager::main_menu(){
 			//sort_books();
 			break;
 		case 4:
+			saving = true;
 			exit_bookshelfy();
 			return true;
 	}
@@ -76,4 +77,23 @@ Bookshelf* AppManager::get_bookshelf(int b_num){
 	if(b_num == (int)bss.size())
 		return NULL;
 	return bss[b_num];
+}
+
+bool AppManager::will_save(){
+	return saving;
+}
+
+void AppManager::save_app_state(){
+	std::vector<Bookshelf*> tmp_array = {bookshelf1, bookshelf2}; 
+	std::vector<std::string> tmp_fnames = {"read.txt", "to_read.txt"};
+
+	std::ofstream file;
+	
+	for(int i=0; i<(int)tmp_fnames.size(); i++){
+		file.open(tmp_fnames[i], std::ios::trunc);
+		for(int j = 0; j<(int)tmp_array[i]->get_content().size(); j++){
+			file << ((tmp_array[i]->get_content())[j]+"\n");
+		}
+		file.close();
+	}
 }

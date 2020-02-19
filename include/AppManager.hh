@@ -2,6 +2,7 @@
 #define APPMANAGER_HH_
 
 #include <ncurses.h>
+#include <fstream>
 
 #include "../include/IWindow.hh"
 #include "../include/Bookshelf.hh"
@@ -13,6 +14,7 @@
 class AppManager{
 	private:
 		int scr_max_y, scr_max_x;
+		bool saving = false;
 		Bookshelf* bookshelf1; 
 		Bookshelf* bookshelf2;
 		InputWindow* inputwindow;
@@ -23,6 +25,8 @@ class AppManager{
 		void remove_book();
 		void exit_bookshelfy();
 		Bookshelf* get_bookshelf(int b_num);
+		bool will_save();
+		void save_app_state();
 };
 
 #endif
