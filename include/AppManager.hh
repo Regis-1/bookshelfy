@@ -25,6 +25,7 @@ class AppManager{
 		void remove_book();
 		void exit_bookshelfy();
 		Bookshelf* get_bookshelf(int b_num);
+		void read_app_state();
 		bool will_save();
 		void save_app_state();
 };

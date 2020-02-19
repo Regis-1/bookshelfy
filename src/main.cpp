@@ -1,5 +1,4 @@
 #include<string>
-
 #include<ncurses.h>
 
 #include "../include/AppManager.hh"
@@ -13,6 +12,8 @@ int main(int argc, char* argv[]){
 	
 	AppManager* appmanager = new AppManager();
 	refresh();
+	appmanager->read_app_state();
+
 	while(!exit)
 		exit = appmanager->main_menu();
 

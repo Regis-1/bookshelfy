@@ -79,6 +79,27 @@ Bookshelf* AppManager::get_bookshelf(int b_num){
 	return bss[b_num];
 }
 
+void AppManager::read_app_state(){
+	std::vector<Bookshelf*> tmp_array = {bookshelf1, bookshelf2};
+	std::vector<std::string> tmp_fnames = {"read.txt", "to_read.txt"};
+	std::vector<std::string> tmp_content;
+
+	std::ifstream file;
+
+	for(int i=0; i<(int)tmp_fnames.size(); i++){
+		file.open(tmp_fnames[i], std::ios::in);
+
+		for(std::string line; getline(file, line); ){
+			tmp_content.push_back(line);
+		}
+		
+		tmp_array[i]->load_content(tmp_content);
+		tmp_content.clear();
+		file.close();
+		tmp_array[i]->print_content(false);
+	}
+}
+
 bool AppManager::will_save(){
 	return saving;
 }
