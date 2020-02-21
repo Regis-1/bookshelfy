@@ -1,7 +1,8 @@
 #include "../include/DialogWindow.hh"
 
-DialogWindow::DialogWindow(std::string t, int size_y, int size_x, int y, int x){
-	load_content(options);
+DialogWindow::DialogWindow(std::string t, int size_y, int size_x, int y, int x, int options_set){
+	std::vector<std::string> tmp_option_array[] = {options_bookshelf, options_yes_no};
+	load_content(tmp_option_array[options_set]);
 	title = t;
 
 	new_iwindow(size_y, size_x, y, x);
@@ -26,7 +27,7 @@ int DialogWindow::print_content(){
 	return 0;
 }
 
-int DialogWindow::choose_bookshelf(){
+int DialogWindow::choose(){
 	int choice = -1;
 	while(choice < 0){
 		print_content();

@@ -6,11 +6,12 @@
 class DialogWindow : public IWindow{
 	private:
 		std::string title;
-		std::vector<std::string> options = {"Read", "To read", "Back"};
+		std::vector<std::string> options_bookshelf = {"Read", "To read", "Back"};
+		std::vector<std::string> options_yes_no = {"Yes", "No", "Back"};
 	public:
-		DialogWindow(std::string t, int size_y, int size_x, int y, int x);
+		DialogWindow(std::string t, int size_y, int size_x, int y, int x, int options_set);
 		int print_content();
-		int choose_bookshelf();
+		int choose();
 };
 
 #endif

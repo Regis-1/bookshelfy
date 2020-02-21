@@ -17,17 +17,32 @@ void Bookshelf::add_book(std::string bn){
 
 void Bookshelf::remove_book(){
 	int book_num = select_book();
-	std::vector<std::string> tmp = get_content();
-	tmp.erase(tmp.begin() + book_num);
-	load_content(tmp);
-	set_highlighted(0);
+	if(book_num > 0){
+		std::vector<std::string> tmp = get_content();
+		tmp.erase(tmp.begin() + book_num);
+		load_content(tmp);
+		set_highlighted(0);
+	}
+}
+
+bool Bookshelf::sort_books(){
+	std::vector<std::string> tmp_content = get_content();
+	if(tmp_content.empty())
+		return false;
+	else
+		std::sort(tmp_content.begin(), tmp_content.end());
+
+	load_content(tmp_content);
+	return true;
 }
 
 int Bookshelf::select_book(){
 	int book_num = -1;
 	while(book_num < 0){
 		print_content(true);
-		book_num = input_action(); //TODO: pressing ESC to cancel selecting
+		book_num = input_action();
+		if(book_num == -2)
+			break;
 	}
 	return book_num;
 }

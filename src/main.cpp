@@ -14,11 +14,22 @@ int main(int argc, char* argv[]){
 	refresh();
 	appmanager->read_app_state();
 
-	while(!exit)
+	while(!exit){
 		exit = appmanager->main_menu();
 
-	if(appmanager->will_save())
-		appmanager->save_app_state();
-
+		if(exit)
+			switch(appmanager->will_save()){
+				case 0:
+					appmanager->save_app_state();
+					break;
+				case 1:
+					break;
+				case 2:
+					exit = false;
+					break;
+			}
+		
+	}
+	endwin();
 	return 0;
 }

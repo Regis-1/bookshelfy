@@ -23,11 +23,9 @@ bool AppManager::main_menu(){
 			//find_book();
 			break;
 		case 3:
-			//sort_books();
+			sort_books();
 			break;
 		case 4:
-			saving = true;
-			exit_bookshelfy();
 			return true;
 	}
 	return false;
@@ -35,41 +33,54 @@ bool AppManager::main_menu(){
 
 void AppManager::add_book(){
 	std::string book_name = inputwindow->input_book_name();
-	int dim_dwindow[2] = {10,30};
-	DialogWindow* dialogwindow = new DialogWindow("Choose bookshelf:", dim_dwindow[0],dim_dwindow[1], scr_max_y/2 - dim_dwindow[0]/2, scr_max_x/2 - dim_dwindow[1]/2);
-	refresh();
-	dialogwindow->print_content();
-	Bookshelf * b = get_bookshelf(dialogwindow->choose_bookshelf());
+	Bookshelf * b = dwindow_choosing();
 	if(b){
 		b->add_book(book_name);
 	}
-	delwin(dialogwindow->get_window());
-	delete dialogwindow;
 	refresh();
 	bookshelf1->print_content(false);
 	bookshelf2->print_content(false);
 }
 
 void AppManager::remove_book(){
-	int dim_dwindow[2] = {10,30};
-	DialogWindow* dialogwindow = new DialogWindow("Choose bookshelf:", dim_dwindow[0],dim_dwindow[1], scr_max_y/2 - dim_dwindow[0]/2, scr_max_x/2 - dim_dwindow[1]/2);
-	refresh();
-	dialogwindow->print_content();
-	Bookshelf * b = get_bookshelf(dialogwindow->choose_bookshelf());
+	Bookshelf * b = dwindow_choosing();
 	if(b){
-		bookshelf1->print_content(false); //to hide dialog window when selecting book
+		bookshelf1->print_content(false);
 		bookshelf2->print_content(false);
 		b->remove_book();
 	}
-	delwin(dialogwindow->get_window());
-	delete dialogwindow;
 	refresh();
 	bookshelf1->print_content(false);
 	bookshelf2->print_content(false);
 }
 
-void AppManager::exit_bookshelfy(){
-	endwin();
+bool AppManager::sort_books(){
+	bool verify = false;
+	Bookshelf* b = dwindow_choosing();
+	if(b){
+		if(!b->sort_books())
+			verify = false;
+	}
+	refresh();
+	bookshelf1->print_content(false);
+	bookshelf2->print_content(false);
+	verify = true;
+
+	return verify;
+}
+
+Bookshelf* AppManager::dwindow_choosing(){
+	int dim_dwindow[2] = {10,30};
+	DialogWindow* dialogwindow = new DialogWindow("Choose bookshelf:", dim_dwindow[0],dim_dwindow[1], scr_max_y/2 - dim_dwindow[0]/2, scr_max_x/2 - dim_dwindow[1]/2, 0);
+	refresh();
+	dialogwindow->print_content();
+	
+	Bookshelf* tmp_b = get_bookshelf(dialogwindow->choose());
+
+	delwin(dialogwindow->get_window());
+	delete dialogwindow;
+
+	return tmp_b;
 }
 
 Bookshelf* AppManager::get_bookshelf(int b_num){
@@ -100,7 +111,21 @@ void AppManager::read_app_state(){
 	}
 }
 
-bool AppManager::will_save(){
+int AppManager::will_save(){
+	int saving = 0;
+	int dim_dwindow[2] = {10,30};
+	DialogWindow* dialogwindow = new DialogWindow("Save changes?", dim_dwindow[0],dim_dwindow[1], scr_max_y/2 - dim_dwindow[0]/2, scr_max_x/2 - dim_dwindow[1]/2, 1);
+	refresh();
+	dialogwindow->print_content();
+
+	saving = dialogwindow->choose();
+
+	delwin(dialogwindow->get_window());
+	delete dialogwindow;
+	refresh();
+	bookshelf1->print_content(false);
+	bookshelf2->print_content(false);
+
 	return saving;
 }
 

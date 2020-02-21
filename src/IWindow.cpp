@@ -85,7 +85,7 @@ int IWindow::input_action(){
 	}
 	else if(ch == K_ENTER)
 		return get_highlighted();
-	else if(ch == (int)'q'){
+	else if(ch == 27){
 		return -2;
 	}
 

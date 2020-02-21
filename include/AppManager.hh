@@ -14,7 +14,6 @@
 class AppManager{
 	private:
 		int scr_max_y, scr_max_x;
-		bool saving = false;
 		Bookshelf* bookshelf1; 
 		Bookshelf* bookshelf2;
 		InputWindow* inputwindow;
@@ -23,10 +22,11 @@ class AppManager{
 		bool main_menu();
 		void add_book();
 		void remove_book();
-		void exit_bookshelfy();
+		bool sort_books();
+		Bookshelf* dwindow_choosing();
 		Bookshelf* get_bookshelf(int b_num);
 		void read_app_state();
-		bool will_save();
+		int will_save();
 		void save_app_state();
 };
 
