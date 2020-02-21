@@ -30,14 +30,14 @@ int InputWindow::print_content(){
 	return 0;
 }
 
-std::string InputWindow::input_book_name(){
+std::string InputWindow::input_book_name(int prompt_num){
 	iclear_window();
 	box_window();
 	irefresh();
 
 	echo();
 	curs_set(1);
-	std::string s = input_prompt();
+	std::string s = input_prompt(prompt_num);
 	noecho();
 	curs_set(0);
 
@@ -46,9 +46,9 @@ std::string InputWindow::input_book_name(){
 	return s;
 }
 
-std::string InputWindow::input_prompt(){
+std::string InputWindow::input_prompt(int prompt_num){
 	char buffer[512];
-	mvwprintw(get_window(), 1, 1, "Name of the book: ");	
+	mvwprintw(get_window(), 1, 1, prompts[prompt_num].c_str());	
 	wgetstr(get_window(), buffer);
 	return std::string(buffer);
 }

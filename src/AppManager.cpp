@@ -20,7 +20,7 @@ bool AppManager::main_menu(){
 			remove_book();
 			break;
 		case 2:
-			//find_book();
+			find_books();
 			break;
 		case 3:
 			sort_books();
@@ -32,7 +32,7 @@ bool AppManager::main_menu(){
 }
 
 void AppManager::add_book(){
-	std::string book_name = inputwindow->input_book_name();
+	std::string book_name = inputwindow->input_book_name(0);
 	Bookshelf * b = dwindow_choosing();
 	if(b){
 		b->add_book(book_name);
@@ -54,8 +54,17 @@ void AppManager::remove_book(){
 	bookshelf2->print_content(false);
 }
 
+void AppManager::find_books(){
+	std::string keyword = inputwindow->input_book_name(1);
+	bookshelf1->search_book(keyword);
+	bookshelf2->search_book(keyword);
+	getch();
+	bookshelf1->recover_content();
+	bookshelf2->recover_content();
+}
+
 bool AppManager::sort_books(){
-	bool verify = false;
+	bool verify = true;
 	Bookshelf* b = dwindow_choosing();
 	if(b){
 		if(!b->sort_books())
@@ -64,7 +73,6 @@ bool AppManager::sort_books(){
 	refresh();
 	bookshelf1->print_content(false);
 	bookshelf2->print_content(false);
-	verify = true;
 
 	return verify;
 }

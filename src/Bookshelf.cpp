@@ -25,6 +25,22 @@ void Bookshelf::remove_book(){
 	}
 }
 
+void Bookshelf::search_book(std::string keyword){
+	std::vector<std::string> tmp_content = get_content();
+	stash = tmp_content;
+	std::vector<std::string> searched_books;
+	size_t found;
+
+	for(int i=0; i<(int)tmp_content.size(); i++){
+		found = tmp_content[i].find(keyword);
+		if(found != std::string::npos)
+			searched_books.push_back(tmp_content[i]);
+	}
+
+	load_content(searched_books);
+	print_content(false);
+}
+
 bool Bookshelf::sort_books(){
 	std::vector<std::string> tmp_content = get_content();
 	if(tmp_content.empty())
@@ -71,4 +87,10 @@ void Bookshelf::print_content(bool w_highlight){
 		}
 	}
 	irefresh();
+}
+
+void Bookshelf::recover_content(){
+	load_content(stash);
+	stash.clear();
+	print_content(false);
 }

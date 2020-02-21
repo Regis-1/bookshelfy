@@ -22,6 +22,7 @@ class AppManager{
 		bool main_menu();
 		void add_book();
 		void remove_book();
+		void find_books();
 		bool sort_books();
 		Bookshelf* dwindow_choosing();
 		Bookshelf* get_bookshelf(int b_num);
