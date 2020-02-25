@@ -41,15 +41,12 @@ void Bookshelf::search_book(std::string keyword){
 	print_content(false);
 }
 
-bool Bookshelf::sort_books(){
+void Bookshelf::sort_books(){
 	std::vector<std::string> tmp_content = get_content();
-	if(tmp_content.empty())
-		return false;
-	else
+	if(!tmp_content.empty())
 		std::sort(tmp_content.begin(), tmp_content.end());
 
 	load_content(tmp_content);
-	return true;
 }
 
 int Bookshelf::select_book(){

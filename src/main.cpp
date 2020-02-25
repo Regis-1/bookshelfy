@@ -3,6 +3,8 @@
 
 #include "../include/AppManager.hh"
 
+enum EXIT_STATES {SAVE, NOT_SAVE, BACK};
+
 int main(int argc, char* argv[]){
 	bool exit = false;
 	initscr();
@@ -19,12 +21,12 @@ int main(int argc, char* argv[]){
 
 		if(exit)
 			switch(appmanager->will_save()){
-				case 0:
+				case SAVE:
 					appmanager->save_app_state();
 					break;
-				case 1:
+				case NOT_SAVE:
 					break;
-				case 2:
+				case BACK:
 					exit = false;
 					break;
 			}

@@ -11,6 +11,8 @@
 
 #define INPUTWIN_HEIGHT 3
 
+enum AVAILABLE_OPTIONS { ADD, REMOVE, FIND, SORT, EXIT };
+
 class AppManager{
 	private:
 		int scr_max_y, scr_max_x;
@@ -23,12 +25,14 @@ class AppManager{
 		void add_book();
 		void remove_book();
 		void find_books();
-		bool sort_books();
+		void sort_books();
 		Bookshelf* dwindow_choosing();
 		Bookshelf* get_bookshelf(int b_num);
 		void read_app_state();
 		int will_save();
 		void save_app_state();
+		void bookshelves_update();
+		DialogWindow* default_dwindow_create(std::string title, int options_set);
 };
 
 #endif

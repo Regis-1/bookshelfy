@@ -13,7 +13,7 @@ class Bookshelf : public IWindow{
 		void add_book(std::string bn);
 		void remove_book();
 		void search_book(std::string keyword);
-		bool sort_books();
+		void sort_books();
 		int select_book();
 		void print_content(bool w_highlight);
 		void recover_content();
